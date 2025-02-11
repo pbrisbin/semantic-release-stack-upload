@@ -21,14 +21,34 @@
 | Step               | Description                                                                    |
 | ------------------ | ------------------------------------------------------------------------------ |
 | `verifyConditions` | verify the environment variable `HACKAGE_KEY` is set and `package.yaml` exists |
+| `verifyRelease`    | Update the version in `package.yaml` **if `PREPARE_IN_VERIFY=1`**              |
 | `prepare`          | Update the version in `package.yaml`                                           |
 | `publish`          | run `stack upload` to publish the package                                      |
 
 ## Environment variables
 
-| Variable      | Description                                                    | Required |
-| ------------- | -------------------------------------------------------------- | -------- |
-| `HACKAGE_KEY` | [API token](https://hackage.haskell.org/packages/) for hackage | true     |
+| Variable            | Description                                                    | Required |
+| ------------------- | -------------------------------------------------------------- | -------- |
+| `HACKAGE_KEY`       | [API token](https://hackage.haskell.org/packages/) for hackage | true     |
+| `PREPARE_IN_VERIFY` | Should we update `package.yaml` in `verifyRelease`?            | false    |
+
+## Prepare in Verify and `dryRun`
+
+If the `PREPARE_IN_VERIFY` environment variable is set to `1`, we will perform
+what is usually done in `prepare` as part of `verifyRelease`, i.e. update the
+`package.yaml` file with the next version.
+
+This is useful if, for example, you are compiling a binary that includes a
+`version` sub-command or `--version` flag that uses the package version [through
+the generated `Paths_` module][paths-version]. If `package.yaml` is not updated
+before this compilation, the compiled-in version will be wrong.
+
+To accomplish a pre-compile update, you can run `semantic-release` in [`dryRun`
+mode][dryRun] with `PREPARE_IN_VERIFY=1`, build your assets, then run it again
+to actually release.
+
+[dryRun]: https://semantic-release.gitbook.io/semantic-release/usage/configuration#dryrun
+[paths-version]: https://stackoverflow.com/a/2892624
 
 ## Install
 
