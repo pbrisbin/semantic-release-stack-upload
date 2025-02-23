@@ -155,7 +155,3 @@ recommended configuration.
 **Default**: undefined
 
 Change to this directory before doing anything.
-
----
-
-[LICENSE](./LICENSE)
