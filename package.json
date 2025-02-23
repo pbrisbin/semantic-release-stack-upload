@@ -22,6 +22,7 @@
     "build": "tsc -p tsconfig.prod.json",
     "format": "prettier --write \"**/*.ts\"",
     "format-check": "prettier --check \"**/*.ts\"",
+    "release": "semantic-release",
     "test": "jest --maxWorkers 1",
     "lint": "eslint"
   },

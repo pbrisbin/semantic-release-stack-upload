@@ -52,7 +52,17 @@ to actually release.
 
 ## Install
 
-TODO
+With npm:
+
+```console
+npm install semantic-release-stack-upload -D
+```
+
+With yarn:
+
+```console
+yarn add semantic-release-stack-upload --dev
+```
 
 ## GitHub Actions
 
@@ -61,7 +71,7 @@ TODO
   uses: cycjimmy/semantic-release-action@v4
   with:
     extra_plugins: |
-      git+https://github.com/pbrisbin/semantic-release-stack-upload.git#main
+      semantic-release-stack-upload
   env:
     GITHUB_TOKEN: ${{ github.token }}
     HACKAGE_KEY: ${{ secrets.HACKAGE_KEY }}
