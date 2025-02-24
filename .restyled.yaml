@@ -3,4 +3,17 @@ also_exclude:
 
 restylers:
   - "!clang-format"
+
+  # https://github.com/restyled-io/restylers/issues/928
+  - prettier: &prettier
+      command:
+        - /app/node_modules/.bin/prettier
+        - --write
+  - prettier-json:
+      <<: *prettier
+  - prettier-markdown:
+      <<: *prettier
+  - prettier-yaml:
+      <<: *prettier
+
   - "*"
